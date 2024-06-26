@@ -1,0 +1,43 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Upload Transactions";
+}
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title text-center">Upload Transactions</h1>
+        </div>
+
+        @if (Model.ErrorMessages.Any())
+        {
+            <div class="alert alert-danger mt-3 ml-3 mr-3">
+                <h2 class="alert-heading">Errors:</h2>
+                <ul>
+                    @foreach (var error in Model.ErrorMessages)
+                    {
+                        <li>@error</li>
+                    }
+                </ul>
+            </div>
+        }
+
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file">Choose a CSV file to upload:</label>
+                    <input type="file" class="form-control-file" id="file" name="file" accept=".csv" required />
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Upload File</button>
+            </form>
+        </div>
+
+        @if (Model.UploadSuccess)
+        {
+            <div class="alert alert-success mt-3 ml-3 mr-3" role="alert">
+                <h4 class="alert-heading">Upload Successful!</h4>
+            </div>
+        }
+    </div>
+</div>
